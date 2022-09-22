@@ -60,15 +60,30 @@ public class ThreadMethods {
 //            System.out.println("#Active threads: " + Thread.activeCount());
 //
 
-            walkThread.setPriority(9);
-            chewThread.setPriority(2);
+//            walkThread.setPriority(9);
+//            chewThread.setPriority(2);
+//
+//            System.out.println("\nwalkThread's priority: " + walkThread.getPriority());
+//            System.out.println("\nchewThread's priority: " + chewThread.getPriority());
+//            System.out.println("\nmain thread's priority: " + Thread.currentThread().getPriority());
+//
+//            walkThread.start();
+//            chewThread.start();
 
-            System.out.println("\nwalkThread's priority: " + walkThread.getPriority());
-            System.out.println("\nchewThread's priority: " + chewThread.getPriority());
-            System.out.println("\nmain thread's priority: " + Thread.currentThread().getPriority());
+            chewThread.setDaemon(true);
 
-            walkThread.start();
-            chewThread.start();
+            System.out.println("\nwalkThread's daemon status: " + walkThread.isDaemon());
+            System.out.println("\nchewThread's daemon status: " + chewThread.isDaemon());
+            System.out.println("\nmain thread's daemon status: " + Thread.currentThread().isDaemon());
+
+            try {
+                walkThread.start();
+                walkThread.join(5000);
+                chewThread.start();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
 
             System.out.println("\n\n");
         }
